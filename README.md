@@ -75,13 +75,49 @@ npm test
 
 **6 tests d'intégration et de modèle réussis**, incluant : CRUD complet, protection de l'ID, conservation des champs avec PATCH, non-réutilisation d'un ID supprimé, erreurs 400/404, absence de mutation après validation invalide, JSON mal formé, valeurs NaN/Infinity rejetées par le modèle, six opérations OpenAPI et Swagger UI accessible. Les tests démarrent une vraie instance HTTP Express sur un port disponible.
 
+## Captures réelles de l’exécution
+
+Ces 7 captures proviennent du navigateur Swagger UI et du terminal exécutant le code de ce dépôt. Elles montrent les requêtes exécutées et leurs vraies réponses ; aucune image générée ou reconstituée.
+
+### 1. Interface Swagger et opérations disponibles
+
+![Interface Swagger et opérations disponibles](lab5-01.jpg)
+
+### 2. GET : liste des 3 produits — 200 OK
+
+![GET : liste des 3 produits — 200 OK](lab5-02.jpg)
+
+### 3. POST : création d’un écran — 201 Created
+
+![POST : création d’un écran — 201 Created](lab5-03.jpg)
+
+### 4. POST invalide : nom vide, prix négatif et stock absent — 400
+
+![POST invalide : nom vide, prix négatif et stock absent — 400](lab5-04.jpg)
+
+### 5. GET : produit 999 inexistant — 404
+
+![GET : produit 999 inexistant — 404](lab5-05.jpg)
+
+### 6. Spécification OpenAPI JSON servie par Express
+
+![Spécification OpenAPI JSON servie par Express](lab5-06.jpg)
+
+### 7. Terminal : 6 tests réussis et serveur démarré
+
+![Terminal : 6 tests réussis et serveur démarré](lab5-07.jpg)
+
+## Collection Postman
+
+Importer [Lab5.postman_collection.json](postman/Lab5.postman_collection.json). La variable `baseUrl` vaut `http://localhost:3000`. Les 10 requêtes couvrent CRUD, PATCH et erreurs. Exécuter la collection sur un serveur fraîchement démarré car DELETE modifie les données en mémoire.
+
 ## Corrections apportées aux exemples du support
 
 - Appel de `new Product(name, price, stock)` aligné sur son constructeur à 3 arguments.
 - Compteur d'IDs monotone, pour éviter de réutiliser le dernier identifiant supprimé.
 - Copies des données à la sortie du repository, afin d'éviter une modification externe du tableau.
 - `app.js` séparé du démarrage pour faciliter les tests HTTP.
-- Génération Swagger attendue avant le démarrage ; création du dossier de sortie ; normalisation du chemin sans slash final et du schéma des paramètres d'ID générés.
+- Génération Swagger attendue avant le démarrage ; création du dossier de sortie ; normalisation du chemin sans slash final, des schémas de produits et des paramètres d'ID générés.
 
 ## Limites
 
