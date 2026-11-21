@@ -49,6 +49,9 @@ test('Modèle : NaN, Infinity et stock non entier rejetés hors HTTP', () => {
 });
 test('OpenAPI et Swagger UI accessibles, six opérations documentées', async () => {
   const doc=await request('/api-docs.json'); assert.equal(doc.status,200); assert.equal(doc.body.openapi,'3.0.0');
+  assert.deepEqual(doc.body.components.schemas.ProductInput.required,['name','price','stock']);
+  assert.equal(doc.body.components.schemas.ProductInput.properties.price.type,'number');
+  assert.equal(doc.body.paths['/api/products/{id}'].get.parameters[0].schema.type,'integer');
   for(const [path,methods] of Object.entries({'/api/products':['get','post'],'/api/products/{id}':['get','put','patch','delete']})) {
     for(const method of methods) assert.ok(doc.body.paths[path]?.[method],`${method} ${path}`);
   }

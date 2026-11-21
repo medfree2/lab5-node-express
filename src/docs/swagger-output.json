@@ -220,187 +220,66 @@
     "schemas": {
       "ProductInput": {
         "type": "object",
+        "required": [
+          "name",
+          "price",
+          "stock"
+        ],
         "properties": {
-          "type": {
+          "name": {
             "type": "string",
-            "example": "object"
+            "minLength": 1,
+            "example": "Écran 24 pouces"
           },
-          "required": {
-            "type": "array",
-            "example": [
-              "name",
-              "price",
-              "stock"
-            ],
-            "items": {
-              "type": "string"
-            }
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "example": 199.99
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "minLength": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Écran 24 pouces"
-                  }
-                }
-              },
-              "price": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "number"
-                  },
-                  "minimum": {
-                    "type": "number",
-                    "example": 0
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 199.99
-                  }
-                }
-              },
-              "stock": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "integer"
-                  },
-                  "minimum": {
-                    "type": "number",
-                    "example": 0
-                  },
-                  "maximum": {
-                    "type": "number",
-                    "example": 9007199254740991
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 10
-                  }
-                }
-              }
-            }
+          "stock": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 10
           }
         }
       },
       "ProductPatch": {
         "type": "object",
         "properties": {
-          "type": {
+          "name": {
             "type": "string",
-            "example": "object"
+            "minLength": 1,
+            "example": "Écran 24 pouces"
           },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "minLength": {
-                    "type": "number",
-                    "example": 1
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Écran 24 pouces"
-                  }
-                }
-              },
-              "price": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "number"
-                  },
-                  "minimum": {
-                    "type": "number",
-                    "example": 0
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 199.99
-                  }
-                }
-              },
-              "stock": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "integer"
-                  },
-                  "minimum": {
-                    "type": "number",
-                    "example": 0
-                  },
-                  "maximum": {
-                    "type": "number",
-                    "example": 9007199254740991
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 10
-                  }
-                }
-              }
-            }
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "example": 199.99
+          },
+          "stock": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 10
           }
         }
       },
       "Product": {
-        "type": "object",
-        "properties": {
-          "allOf": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "object"
-                },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "integer"
-                        },
-                        "example": {
-                          "type": "number",
-                          "example": 1
-                        }
-                      }
-                    }
-                  }
-                }
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductInput"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": 1
               }
             }
           }
-        }
+        ]
       }
     }
   }

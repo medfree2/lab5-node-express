@@ -13,6 +13,7 @@ const document = {
     Product: { allOf: [{ $ref: '#/components/schemas/ProductInput' }, { type: 'object', properties: { id: { type: 'integer', example: 1 } } }] }
   } }
 };
+const schemas = structuredClone(document.components.schemas);
 await mkdir(new URL('./src/docs/', import.meta.url), { recursive: true });
 const previous = process.cwd();
 try {
@@ -22,6 +23,7 @@ try {
   // Normalisation des chemins et paramètres issus de swagger-autogen.
   const output = new URL('./src/docs/swagger-output.json', import.meta.url);
   const generated = JSON.parse(await readFile(output, 'utf8'));
+  generated.components.schemas = schemas;
   if (generated.paths['/api/products/']) {
     generated.paths['/api/products'] = generated.paths['/api/products/'];
     delete generated.paths['/api/products/'];
